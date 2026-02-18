@@ -14,7 +14,7 @@ Funções utilizadas:
 */
 
 
--- Exibe número de clientes por país
+-- Total de clientes por país
 SELECT
 	country,
 	COUNT(customer_key) AS total_customers
@@ -22,7 +22,7 @@ FROM gold.dim_customers
 GROUP BY country
 ORDER BY total_customers DESC
 
--- Exibe número de clientes por gênero
+-- Total de clientes por gênero
 SELECT
 	gender,
 	COUNT(customer_key) AS total_customers
@@ -30,7 +30,7 @@ FROM gold.dim_customers
 GROUP BY gender
 ORDER BY total_customers DESC
 
--- Exibe número de clientes por status civil
+-- Total de clientes por status civil
 SELECT
 	marital_status,
 	COUNT(customer_key) AS total_customers
@@ -38,7 +38,7 @@ FROM gold.dim_customers
 GROUP BY marital_status
 ORDER BY total_customers DESC
 
--- Exibe número de clientes por gênero
+-- Total de produtos por categoria
 SELECT
 	DISTINCT category,
 	COUNT(product_key) AS total_products
@@ -46,7 +46,7 @@ FROM gold.dim_products
 GROUP BY category
 ORDER BY total_products DESC
 
--- Exibe custo médio por categoria
+-- Custo médio por categoria
 SELECT
 	category,
 	ROUND(AVG(cost),2) AS avg_cost
@@ -74,7 +74,7 @@ LEFT JOIN gold.dim_customers c ON c.customer_key = f.customer_key
 GROUP BY c.customer_key, c.first_name, c.last_name
 ORDER BY total_revenue DESC
 
--- Distribuição das vendas em países
+-- Total de produtos vendidos por país
 SELECT 
 	c.country,
 	SUM(f.quantity) AS total_items_sold
