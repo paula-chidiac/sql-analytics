@@ -1,14 +1,14 @@
-# Analytics SQL – Relatórios de Clientes, Produtos e Vendas
+# SQL Analytics – Consultas sobre vendas, produtos e clientes
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-Analytics-blue)
 ![Reports](https://img.shields.io/badge/Reports-KPIs-orange)
 ![CSV](https://img.shields.io/badge/Data-CSV-success)
 
-Bem-vindo ao repositório de **SQL Analytics **, uma coleção de diversos scripts SQL para exploração de dados, análise e produção de relatórios, com foco em **métricas de clientes, produtos e vendas**.  
+Bem-vindo ao repositório de **SQL Analytics**, uma coleção de diversos scripts SQL para exploração de dados, análise e produção de relatórios, com foco em **métricas de clientes, produtos e vendas**.  
 
 Este projeto reaproveita a camada gold criada no projeto de data-warehouse [SQL Data Warehouse](https://github.com/paula-chidiac/sql-data-warehouse/tree/main), mas disponibiliza um script de criação do zero para reprodutibilidade.
 
-🇺🇸 English version available here:
+🇺🇸 English version available here: [README_EN.md](README_EN.md)
 
 ---
 
