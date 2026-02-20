@@ -47,7 +47,7 @@ prod_aggregations AS (
 		EXTRACT
 			(YEAR FROM AGE(MAX(order_date), MIN(order_date))) * 12
             + EXTRACT(MONTH FROM AGE(MAX(order_date), MIN(order_date)))
-        	AS lifespan,
+        	AS lifespan_months,
         MAX(order_date) AS last_sale_date,
         COUNT(DISTINCT order_number) AS total_orders,
         COUNT(DISTINCT customer_key) AS total_customers,
@@ -74,13 +74,13 @@ SELECT
     EXTRACT
 		(YEAR FROM AGE(NOW(), last_sale_date)) * 12
         + EXTRACT(MONTH FROM AGE(NOW(), last_sale_date))
-    	AS recency_in_months,
+    	AS recency_months,
     CASE
         WHEN total_sales > 50000 THEN 'High'
         WHEN total_sales >= 10000 THEN 'Medium'
         ELSE 'Low'
     END AS product_performance,
-    lifespan,
+    lifespan_months,
     total_orders,
     total_sales,
     total_quantity,
@@ -91,7 +91,7 @@ SELECT
         ELSE total_sales / total_orders
     END AS avg_order_revenue,
     CASE
-        WHEN lifespan = 0 THEN total_sales
-        ELSE total_sales / lifespan
+        WHEN lifespan_months = 0 THEN total_sales
+        ELSE ROUND(total_sales / lifespan_months, 2)
     END AS avg_monthly_revenue
 FROM prod_aggregations;
