@@ -42,6 +42,6 @@ Os scripts SQL contemplam, entre outros:
 
 ## 🙏 Reconhecimento
 
-Este projeto foi inspirado no conteúdo educacional do **Data With Baraa**.
+Este projeto foi inspirado no conteúdo educacional do canal **Data With Baraa**.
 
 A implementação técnica, adaptação para PostgreSQL e demais decisões foram desenvolvidas de forma independente.  
