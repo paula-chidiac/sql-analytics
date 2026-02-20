@@ -49,7 +49,7 @@ cust_aggregations AS (
 		EXTRACT
 			(YEAR FROM AGE(MAX(order_date), MIN(order_date))) * 12
 			+ EXTRACT(MONTH FROM AGE(MAX(order_date), MIN(order_date))
-			) AS lifespan
+			) AS lifespan_months
 	FROM base_query
 	GROUP BY 
 		customer_key,
@@ -69,7 +69,7 @@ SELECT
 	total_quantity,
 	total_products,
 	last_order_date,
-	lifespan,
+	lifespan_months,
 	CASE
 		WHEN age < 20 THEN 'Under 20'
 		WHEN age BETWEEN 20 AND 29 THEN '20-29'
@@ -78,20 +78,20 @@ SELECT
 		ELSE '50+'
 	END AS age_group, 
 	CASE 
-    	WHEN lifespan >= 12 AND total_sales > 5000 THEN 'VIP'
-        WHEN lifespan >= 12 AND total_sales <= 5000 THEN 'Regular'
+    	WHEN lifespan_months >= 12 AND total_sales > 5000 THEN 'VIP'
+        WHEN lifespan_months >= 12 AND total_sales <= 5000 THEN 'Regular'
         ELSE 'New'
     END AS customer_segment,
 	EXTRACT
 		(YEAR FROM AGE(NOW(), last_order_date)) * 12
     	+ EXTRACT(MONTH FROM AGE(NOW(), last_order_date))
-		AS recency,
+		AS recency_months,
 	CASE 
 		WHEN total_orders = 0 THEN 0
 		ELSE total_sales / total_orders 
 		END AS avg_order_value,
 	CASE 
-		WHEN lifespan = 0 THEN total_sales
-    	ELSE total_sales / lifespan
+		WHEN lifespan_months = 0 THEN total_sales
+    	ELSE ROUND(total_sales / lifespan_months, 2)
 		END AS avg_monthly_spend
 FROM cust_aggregations
